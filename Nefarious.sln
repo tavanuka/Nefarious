@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9F13C7E5-723B-4F4F-8896-DEA2BB12A836}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D6DEABC5-E99F-417E-802F-56B3D8CC16AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nefarious.Common", "src\Nefarious.Common\Nefarious.Common.csproj", "{FE437D82-04CA-4640-BA1E-2E36D3B1B50C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nefarious.Core", "src\Nefarious.Core\Nefarious.Core.csproj", "{608C32BE-40FC-4510-81A5-9F2B1CCA8E40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nefarious.Host", "src\Nefarious.Host\Nefarious.Host.csproj", "{74001702-D7F8-4D3B-95E5-BACD7B126E4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nefarious.Spotify", "src\Nefarious.Spotify\Nefarious.Spotify.csproj", "{1688999D-2589-4C81-8BB2-93227A68D7BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nefarious.Tests", "tests\Nefarious.Tests\Nefarious.Tests.csproj", "{5AC764E8-F122-49B1-99BD-4A3DF7E5FD43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE437D82-04CA-4640-BA1E-2E36D3B1B50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE437D82-04CA-4640-BA1E-2E36D3B1B50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE437D82-04CA-4640-BA1E-2E36D3B1B50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE437D82-04CA-4640-BA1E-2E36D3B1B50C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{608C32BE-40FC-4510-81A5-9F2B1CCA8E40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608C32BE-40FC-4510-81A5-9F2B1CCA8E40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608C32BE-40FC-4510-81A5-9F2B1CCA8E40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608C32BE-40FC-4510-81A5-9F2B1CCA8E40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74001702-D7F8-4D3B-95E5-BACD7B126E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74001702-D7F8-4D3B-95E5-BACD7B126E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74001702-D7F8-4D3B-95E5-BACD7B126E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74001702-D7F8-4D3B-95E5-BACD7B126E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1688999D-2589-4C81-8BB2-93227A68D7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1688999D-2589-4C81-8BB2-93227A68D7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1688999D-2589-4C81-8BB2-93227A68D7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1688999D-2589-4C81-8BB2-93227A68D7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC764E8-F122-49B1-99BD-4A3DF7E5FD43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC764E8-F122-49B1-99BD-4A3DF7E5FD43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC764E8-F122-49B1-99BD-4A3DF7E5FD43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC764E8-F122-49B1-99BD-4A3DF7E5FD43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE437D82-04CA-4640-BA1E-2E36D3B1B50C} = {9F13C7E5-723B-4F4F-8896-DEA2BB12A836}
+		{608C32BE-40FC-4510-81A5-9F2B1CCA8E40} = {9F13C7E5-723B-4F4F-8896-DEA2BB12A836}
+		{74001702-D7F8-4D3B-95E5-BACD7B126E4E} = {9F13C7E5-723B-4F4F-8896-DEA2BB12A836}
+		{1688999D-2589-4C81-8BB2-93227A68D7BA} = {9F13C7E5-723B-4F4F-8896-DEA2BB12A836}
+		{5AC764E8-F122-49B1-99BD-4A3DF7E5FD43} = {D6DEABC5-E99F-417E-802F-56B3D8CC16AE}
+	EndGlobalSection
+EndGlobal
