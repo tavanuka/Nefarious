@@ -1,19 +1,24 @@
 using Nefarious.Common.Options;
 using Nefarious.Core.Extensions;
 using Nefarious.Core.Services;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Trace;
 using Serilog;
 
+// Two-stage initialization: https://github.com/serilog/serilog-aspnetcore?tab=readme-ov-file#two-stage-initialization
 Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .WriteTo.Console()
-    .CreateLogger();
+    .CreateBootstrapLogger();
 
 try
 {
     var builder = Host.CreateApplicationBuilder(args);
     var config = builder.Configuration;
 
-    builder.Services.AddSerilog();
+    var otlpExporter = builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"];
+    var serviceName = builder.Configuration["OTEL_SERVICE_NAME"] ?? "Undefined";
 
     builder.Services.AddOptions<DiscordOptions>()
         .Bind(config.GetRequiredSection(DiscordOptions.SectionName))
@@ -21,6 +26,37 @@ try
     builder.Services.AddOptions<SpotifyOptions>()
         .Bind(config.GetRequiredSection(SpotifyOptions.SectionName))
         .ValidateOnStart();
+
+    builder.Services.AddSerilog((sp, loggerConfiguration) => {
+        loggerConfiguration
+            .ReadFrom.Configuration(builder.Configuration)
+            .ReadFrom.Services(sp)
+            .Enrich.FromLogContext()
+            .WriteTo.Console();
+
+        if (!string.IsNullOrEmpty(otlpExporter))
+            loggerConfiguration
+                .WriteTo.OpenTelemetry(options => {
+                    options.Endpoint = otlpExporter;
+                    options.ResourceAttributes.Add("service.name", serviceName);
+                });
+    });
+
+    builder.Services.AddOpenTelemetry()
+        .WithMetrics(metrics => metrics
+            .AddRuntimeInstrumentation())
+        .WithTracing(tracing => {
+            if (builder.Environment.IsDevelopment())
+                tracing.SetSampler(new AlwaysOnSampler());
+        });
+
+    // Add OTLP Exporters.
+    if (!string.IsNullOrWhiteSpace(otlpExporter))
+    {
+        builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter());
+        builder.Services.ConfigureOpenTelemetryMeterProvider(metrics => metrics.AddOtlpExporter());
+        builder.Services.ConfigureOpenTelemetryTracerProvider(tracing => tracing.AddOtlpExporter());
+    }
 
     builder.Services.AddDiscordWebsocketClient(config);
     builder.Services.AddHostedService<NefariousBotService>();
