@@ -47,7 +47,8 @@ try
 
     builder.Services.AddOpenTelemetry()
         .WithMetrics(metrics => metrics
-            .AddRuntimeInstrumentation())
+            .AddRuntimeInstrumentation()
+            .AddHttpClientInstrumentation())
         .WithTracing(tracing => {
             if (builder.Environment.IsDevelopment())
                 tracing.SetSampler(new AlwaysOnSampler());
