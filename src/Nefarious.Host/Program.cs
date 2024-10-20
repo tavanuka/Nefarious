@@ -66,6 +66,9 @@ try
     
     builder.Services.AddSpotifyClient();
     builder.Services.AddDiscordWebsocketClient(config);
+    
+    builder.Services.AddSingleton<IPlaylistService, PlaylistService>();
+    
     builder.Services.AddHostedService<NefariousBotService>();
 
     var app = builder.Build();
