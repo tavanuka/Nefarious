@@ -1,6 +1,9 @@
 using Nefarious.Common.Options;
 using Nefarious.Core.Extensions;
 using Nefarious.Core.Services;
+using Nefarious.Spotify.Extensions;
+using Nefarious.Spotify.Publishers;
+using Nefarious.Spotify.Services;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
@@ -61,6 +64,7 @@ try
     builder.AddRedisClient("nefarious-cache");
     builder.AddRedisDistributedCache(connectionName: "nefarious-cache");
     
+    builder.Services.AddSpotifyClient();
     builder.Services.AddDiscordWebsocketClient(config);
     builder.Services.AddHostedService<NefariousBotService>();
 

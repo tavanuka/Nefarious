@@ -30,6 +30,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Nefarious.Common\Nefarious.Common.csproj" />
       <ProjectReference Include="..\Nefarious.Core\Nefarious.Core.csproj" />
+      <ProjectReference Include="..\Nefarious.Spotify\Nefarious.Spotify.csproj" />
     </ItemGroup>
 
 </Project>
