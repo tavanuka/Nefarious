@@ -11,7 +11,8 @@ public static class SpotifyServiceCollectionExtensions
     {
         services.AddSingleton(sp => {
             var config = sp.GetRequiredService<IOptions<SpotifyOptions>>().Value;
-            return SpotifyClientConfig.CreateDefault(config.ApiKey);
+            return SpotifyClientConfig.CreateDefault()
+                .WithAuthenticator(new ClientCredentialsAuthenticator(config.ClientId, config.ClientSecret));
         });
  
         services.AddSingleton<ISpotifyClient>(sp => new SpotifyClient(sp.GetRequiredService<SpotifyClientConfig>()));
