@@ -58,6 +58,9 @@ try
         builder.Services.ConfigureOpenTelemetryTracerProvider(tracing => tracing.AddOtlpExporter());
     }
 
+    builder.AddRedisClient("nefarious-cache");
+    builder.AddRedisDistributedCache(connectionName: "nefarious-cache");
+    
     builder.Services.AddDiscordWebsocketClient(config);
     builder.Services.AddHostedService<NefariousBotService>();
 
