@@ -70,6 +70,7 @@ try
     builder.Services.AddSingleton<IPlaylistService, PlaylistService>();
     
     builder.Services.AddHostedService<NefariousBotService>();
+    builder.Services.AddHostedService<PlaylistMonitorPublisher>();
 
     var app = builder.Build();
 
