@@ -13,7 +13,8 @@ public static class DiscordServiceCollectionExtensions
 {
     private static IServiceCollection AddDiscordCoreServices(this IServiceCollection services) =>
         services
-            .AddSingleton(sp => {
+            .AddSingleton<InteractionService>(sp => new InteractionService(sp.GetRequiredService<DiscordSocketClient>()))
+            .AddSingleton<CommandService>(sp => {
                 var options = sp.GetRequiredService<IOptions<DiscordOptions>>().Value;
                 return new CommandService(new CommandServiceConfig
                 {
@@ -24,7 +25,7 @@ public static class DiscordServiceCollectionExtensions
 
     public static IServiceCollection AddDiscordWebsocketClient(this IServiceCollection services, IConfiguration configuration) =>
         services
-            .AddSingleton(sp => {
+            .AddSingleton<DiscordSocketClient>(sp => {
                 var options = sp.GetRequiredService<IOptions<DiscordOptions>>().Value;
                 return new DiscordSocketClient(new DiscordSocketConfig
                 {
@@ -36,6 +37,5 @@ public static class DiscordServiceCollectionExtensions
                     LogGatewayIntentWarnings = options.LogGatewayIntentWarnings
                 });
             })
-            .AddSingleton(sp => new InteractionService(sp.GetRequiredService<DiscordSocketClient>()))
             .AddDiscordCoreServices();
 }
