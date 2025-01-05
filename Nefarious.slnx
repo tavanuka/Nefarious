@@ -1,19 +1,18 @@
 ﻿<Solution>
-  <Folder Name="/root/">
-    <File Path=".gitignore" />
-    <File Path="Directory.Packages.props" />
-  </Folder>
-  <Folder Name="/src/">
-    <Project Path="Nefarious.Api\Nefarious.Api.csproj" Type="Classic C#" />
-    <Project Path="src\Nefarious.Common\Nefarious.Common.csproj" Type="Classic C#" />
-    <Project Path="src\Nefarious.Core\Nefarious.Core.csproj" Type="Classic C#" />
-    <Project Path="src\Nefarious.Host\Nefarious.Host.csproj" Type="Classic C#" />
-    <Project Path="src\Nefarious.Spotify\Nefarious.Spotify.csproj" Type="Classic C#" />
-  </Folder>
-  <Folder Name="/src/orchestration/">
-    <Project Path="src\orchestration\Nefarious.Aspire\Nefarious.Aspire.csproj" Type="Classic C#" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests\Nefarious.Tests\Nefarious.Tests.csproj" Type="Classic C#" />
-  </Folder>
+    <Folder Name="/root/">
+        <File Path=".gitignore"/>
+        <File Path="Directory.Packages.props"/>
+    </Folder>
+    <Folder Name="/src/">
+        <Project Path="src\Nefarious.Common\Nefarious.Common.csproj" Type="Classic C#"/>
+        <Project Path="src\Nefarious.Core\Nefarious.Core.csproj" Type="Classic C#"/>
+        <Project Path="src\Nefarious.Host\Nefarious.Host.csproj" Type="Classic C#"/>
+        <Project Path="src\Nefarious.Spotify\Nefarious.Spotify.csproj" Type="Classic C#"/>
+    </Folder>
+    <Folder Name="/src/orchestration/">
+        <Project Path="src\orchestration\Nefarious.Aspire\Nefarious.Aspire.csproj" Type="Classic C#"/>
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests\Nefarious.Tests\Nefarious.Tests.csproj" Type="Classic C#"/>
+    </Folder>
 </Solution>
