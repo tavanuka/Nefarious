@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9F13C7E5-723B-4F4F-8896-DEA2BB12A836}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D6DEABC5-E99F-417E-802F-56B3D8CC16AE}"
 EndProject
@@ -17,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nefarious.Aspire", "src\orchestration\Nefarious.Aspire\Nefarious.Aspire.csproj", "{1EB34201-692A-4579-AD82-EEBFF4A920D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "orchestration", "orchestration", "{263331E8-9FFE-422F-BA34-C115CA750621}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nefarious.Api", "src\Nefarious.Api\Nefarious.Api.csproj", "{357DE4FD-C403-4105-8923-8D4C4E7B338F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +53,10 @@ Global
 		{1EB34201-692A-4579-AD82-EEBFF4A920D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB34201-692A-4579-AD82-EEBFF4A920D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB34201-692A-4579-AD82-EEBFF4A920D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357DE4FD-C403-4105-8923-8D4C4E7B338F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357DE4FD-C403-4105-8923-8D4C4E7B338F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357DE4FD-C403-4105-8923-8D4C4E7B338F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357DE4FD-C403-4105-8923-8D4C4E7B338F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FE437D82-04CA-4640-BA1E-2E36D3B1B50C} = {9F13C7E5-723B-4F4F-8896-DEA2BB12A836}
@@ -57,5 +66,6 @@ Global
 		{5AC764E8-F122-49B1-99BD-4A3DF7E5FD43} = {D6DEABC5-E99F-417E-802F-56B3D8CC16AE}
 		{263331E8-9FFE-422F-BA34-C115CA750621} = {9F13C7E5-723B-4F4F-8896-DEA2BB12A836}
 		{1EB34201-692A-4579-AD82-EEBFF4A920D0} = {263331E8-9FFE-422F-BA34-C115CA750621}
+		{357DE4FD-C403-4105-8923-8D4C4E7B338F} = {9F13C7E5-723B-4F4F-8896-DEA2BB12A836}
 	EndGlobalSection
 EndGlobal

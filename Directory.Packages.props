@@ -29,6 +29,7 @@
         <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.10.0"/>
         <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.10.0"/>
         <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.10.0"/>
+        <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0"/>
         <PackageVersion Include="Serilog.Extensions.Hosting" Version="9.0.0"/>
         <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0"/>
         <PackageVersion Include="StackExchange.Redis" Version="2.8.24"/>
