@@ -10,12 +10,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0"/>
-        <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.1" />
+        <PackageReference Include="Aspire.Hosting.AppHost"/>
+        <PackageReference Include="Aspire.Hosting.Redis"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Nefarious.Host\Nefarious.Host.csproj" />
+        <ProjectReference Include="..\..\Nefarious.Host\Nefarious.Host.csproj"/>
     </ItemGroup>
 
 </Project>
