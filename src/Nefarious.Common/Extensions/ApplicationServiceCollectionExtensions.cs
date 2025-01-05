@@ -7,7 +7,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 using Serilog;
 
-namespace Nefarious.Core.Extensions;
+namespace Nefarious.Common.Extensions;
 
 public static class ApplicationServiceCollectionExtensions
 {
@@ -33,7 +33,7 @@ public static class ApplicationServiceCollectionExtensions
     {
         var otlpExporter = configuration["OTEL_EXPORTER_OTLP_ENDPOINT"];
         var serviceName = configuration["OTEL_SERVICE_NAME"] ?? "Undefined";
-        
+
         services.AddSerilog((sp, loggerConfiguration) => {
             loggerConfiguration
                 .ReadFrom.Configuration(configuration)
@@ -50,7 +50,7 @@ public static class ApplicationServiceCollectionExtensions
                         options.ResourceAttributes.Add("service.name", serviceName);
                     });
         });
-        
+
         return services;
     }
 
