@@ -1,5 +1,5 @@
 ﻿// Two-stage initialization: https://github.com/serilog/serilog-aspnetcore?tab=readme-ov-file#two-stage-initialization
-using Nefarious.Core.Extensions;
+using Nefarious.Common.Extensions;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
