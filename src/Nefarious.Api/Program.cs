@@ -1,5 +1,9 @@
 ﻿// Two-stage initialization: https://github.com/serilog/serilog-aspnetcore?tab=readme-ov-file#two-stage-initialization
 using Nefarious.Common.Extensions;
+using Nefarious.Core.Extensions;
+using Nefarious.Core.Services;
+using Nefarious.Spotify.Extensions;
+using Nefarious.Spotify.Publishers;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -23,7 +27,15 @@ try
         .AddOptions(configuration)
         .AddLogging(configuration)
         .AddOpenTelemetry(configuration, environment);
+    
+    // Communication clients to various third party services go here.
+    builder.Services.AddSpotifyClient();
+    builder.Services.AddDiscordWebsocketClient(configuration);
 
+    // Hosted services or background services go here.
+    builder.Services.AddHostedService<NefariousBotService>();
+    builder.Services.AddHostedService<PlaylistMonitorPublisher>();
+    
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
