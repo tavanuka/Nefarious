@@ -4,6 +4,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder
     .AddRedis("nefarious-cache")
+    .WithRedisCommander()
     .WithDataVolume();
 
 if(builder.Configuration.GetValue<bool>("Host"))
