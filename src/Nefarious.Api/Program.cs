@@ -29,6 +29,9 @@ try
         .AddLogging(configuration)
         .AddOpenTelemetry(configuration, environment);
     
+    builder.AddRedisClient("nefarious-cache");
+    builder.AddRedisDistributedCache(connectionName: "nefarious-cache");
+    
     // Communication clients to various third party services go here.
     builder.Services.AddSpotifyClient();
     builder.Services.AddDiscordWebsocketClient(configuration);
