@@ -46,6 +46,8 @@ try
     }
 
     app.UseHttpsRedirection();
+    
+    app.Run();
 }
 catch (Exception e)
 {
