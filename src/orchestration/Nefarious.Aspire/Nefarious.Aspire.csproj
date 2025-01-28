@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Nefarious.Api\Nefarious.Api.csproj" />
         <ProjectReference Include="..\..\Nefarious.Host\Nefarious.Host.csproj"/>
     </ItemGroup>
 
