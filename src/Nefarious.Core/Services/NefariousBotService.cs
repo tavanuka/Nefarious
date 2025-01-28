@@ -2,9 +2,11 @@
 using Discord.WebSocket;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Nefarious.Common.Events;
 using Nefarious.Common.Options;
 using Nefarious.Common.Services.Discord;
 using StackExchange.Redis;
+using System.Text.Json;
 
 namespace Nefarious.Core.Services;
 
@@ -12,7 +14,9 @@ public class NefariousBotService : DiscordWebsocketService<NefariousBotService>
 {
     private readonly IConnectionMultiplexer _redis;
     private readonly RedisChannel _channel;
+    private readonly JsonSerializerOptions _jsonOptions;
     private IMessageChannel _guildChannel;
+    
     public NefariousBotService(
         DiscordSocketClient client,
         ILogger<NefariousBotService> logger,
@@ -22,19 +26,26 @@ public class NefariousBotService : DiscordWebsocketService<NefariousBotService>
     {
         _redis = redis;
         _channel = new RedisChannel("playlist_monitor", RedisChannel.PatternMode.Literal);
-        _guildChannel = default!;
+        _guildChannel = null!;
+        _jsonOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
     }
 
     protected override async Task ExecuteAsync(CancellationToken token)
     {
-        await _redis
-            .GetSubscriber()
-            .SubscribeAsync(_channel, (channel, message) => {
-                _ = Task.Run(async () => {
-                    Logger.LogInformation("Received playlist update notification from Redis: {Message}", message.ToString());
-                    await NotifyChannel(message);
-                }, token);
-            });
+        var sub = _redis.GetSubscriber();
+
+        await sub.SubscribeAsync(_channel, (channel, message) => {
+            Logger.LogDebug("[NefariousBot:{Channel}] - Received playlist update notification: {Message}", channel, message.ToString());
+            // enables token cancellation
+            _ = Task.Run(async () => {
+                var json = message.ToString();
+                var data = JsonSerializer.Deserialize<PlaylistUpdated>(json, _jsonOptions);
+                await NotifyChannel(data);
+            }, token);
+        });
         await base.ExecuteAsync(token);
     }
 
@@ -44,7 +55,7 @@ public class NefariousBotService : DiscordWebsocketService<NefariousBotService>
             _guildChannel = channel;
     }
 
-    private async Task NotifyChannel(RedisValue message)
+    private async Task NotifyChannel(PlaylistUpdated? message)
     {
         if (message is not null)
         {
