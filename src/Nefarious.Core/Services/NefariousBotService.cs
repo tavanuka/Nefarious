@@ -46,6 +46,20 @@ public class NefariousBotService : DiscordWebsocketService<NefariousBotService>
 
     private async Task NotifyChannel(RedisValue message)
     {
-        await _guildChannel.SendMessageAsync($"Status: {message}");
+        if (message is not null)
+        {
+            var embed = new EmbedBuilder()
+                .WithTitle($"'{message.PlaylistName}' has been updated!")
+                .WithDescription($"*{message.UpdatedTrack.Name}* by {message.UpdatedTrack.Artists}")
+                .WithUrl(message.UpdatedTrack.Url)
+                .WithThumbnailUrl(message.UpdatedTrack.AlbumCoverUrl)
+                .WithFooter($"Updated by: {message.UpdatedBy}")
+                .WithColor(Color.Green)
+                .WithCurrentTimestamp();
+
+            await _guildChannel.SendMessageAsync(embed: embed.Build());
+        }
+        else
+            Logger.LogError("[NefariousBotService] No message provided - message is null");
     }
 }
