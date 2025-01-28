@@ -7,10 +7,12 @@ var cache = builder
     .WithDataVolume();
 
 if(builder.Configuration.GetValue<bool>("Host"))
-    builder.AddProject<Projects.Nefarious_Api>("nefarious-api")
+    builder.AddProject<Projects.Nefarious_Host>("nefarious-host")
+        .WaitFor(cache)
         .WithReference(cache);
 else 
-    builder.AddProject<Projects.Nefarious_Host>("nefarious-host")
+    builder.AddProject<Projects.Nefarious_Api>("nefarious-api")
+        .WaitFor(cache)
         .WithReference(cache);
 
 builder.Build().Run();
