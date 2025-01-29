@@ -34,22 +34,22 @@ public class CachedPlaylistRepository : ICachedPlaylistRepository
 
     public async Task<FullPlaylist> GetPlaylist(string playlistId)
     {
-        var cachePlaylistKey = $"playlist:{playlistId}";
-        var snapshotKey = $"{cachePlaylistKey}:snapshot";
+        var playlistKey = $"playlist:{playlistId}";
+        var snapshotKey = $"{playlistKey}:snapshot";
 
         var playlist = await _spotifyClient.Playlists.Get(playlistId);
 
         if (string.IsNullOrEmpty(playlist.SnapshotId))
             return playlist;
 
-        var cachedPlaylist = await _cache.GetStringAsync(cachePlaylistKey);
+        var cachedPlaylist = await _cache.GetStringAsync(playlistKey);
         var cachedSnapshotId = await _cache.GetStringAsync(snapshotKey);
 
         if (!string.IsNullOrEmpty(cachedPlaylist) && cachedSnapshotId == playlist.SnapshotId)
             return JsonSerializer.Deserialize<FullPlaylist>(cachedPlaylist, _jsonOptions) ?? new FullPlaylist();
 
         await _cache.SetStringAsync(snapshotKey, playlist.SnapshotId);
-        await _cache.SetStringAsync(cachePlaylistKey, JsonSerializer.Serialize(playlist, options: _jsonOptions));
+        await _cache.SetStringAsync(playlistKey, JsonSerializer.Serialize(playlist, options: _jsonOptions));
 
         return playlist;
     }
