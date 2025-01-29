@@ -129,4 +129,32 @@ public class PlaylistSubscriptionServiceTests
                 Assert.Contains(channelId, actualSubscriptions[playlistId]);
         }
     }
+
+    [Fact]
+    public async Task ConcurrentAddAndRemove_ShouldBe_ThreadSafe()
+    {
+        // Arrange
+        const string playlistId = "fashf2fsa";
+        const int amount = 50;
+
+        var tasks = new List<Task>();
+        var channelIds = Enumerable.Range(1, amount)
+            .Select(i => (ulong)i)
+            .ToList();
+
+        // Act
+        foreach (var channelId in channelIds)
+        {
+            tasks.Add(_sut.AddSubscription(playlistId, channelId));
+            if (channelId % 2 == 0)
+                tasks.Add(_sut.RemoveSubscription(playlistId, channelId));
+        }
+
+        await Task.WhenAll(tasks);
+
+        // Assert
+        var actualSubscriptions = _sut.GetSubscribers(playlistId);
+        Assert.Equal(amount / 2, actualSubscriptions.Count);
+        Assert.All(actualSubscriptions, id => Assert.NotEqual(0d, id % 2));
+    }
 }
