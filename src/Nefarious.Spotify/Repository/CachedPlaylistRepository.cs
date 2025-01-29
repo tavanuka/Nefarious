@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using Nefarious.Spotify.Converters;
 using SpotifyAPI.Web;
-using System.Collections.Concurrent;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,13 +9,14 @@ namespace Nefarious.Spotify.Repository;
 
 public class CachedPlaylistRepository : ICachedPlaylistRepository
 {
+    private readonly ILogger<CachedPlaylistRepository> _logger;
     private readonly ISpotifyClient _spotifyClient;
     private readonly IDistributedCache _cache;
-    private readonly ConcurrentDictionary<string, FullPlaylist> _memoryCache = new();
     private readonly JsonSerializerOptions _jsonOptions;
 
-    public CachedPlaylistRepository(ISpotifyClient spotifyClient, IDistributedCache cache)
+    public CachedPlaylistRepository(ILogger<CachedPlaylistRepository> logger, ISpotifyClient spotifyClient, IDistributedCache cache)
     {
+        _logger = logger;
         _spotifyClient = spotifyClient;
         _cache = cache;
         _jsonOptions = new JsonSerializerOptions
@@ -36,7 +37,7 @@ public class CachedPlaylistRepository : ICachedPlaylistRepository
         var cachePlaylistKey = $"playlist:{playlistId}";
         var snapshotKey = $"{cachePlaylistKey}:snapshot";
 
-        var playlist = await GetPlaylistFromApi(playlistId);
+        var playlist = await _spotifyClient.Playlists.Get(playlistId);
 
         if (string.IsNullOrEmpty(playlist.SnapshotId))
             return playlist;
@@ -59,30 +60,16 @@ public class CachedPlaylistRepository : ICachedPlaylistRepository
         var snapshotKey = $"{playlistKey}:snapshot";
 
         var cachedSnapshotId = await _cache.GetStringAsync(snapshotKey);
-        var playlist = await GetPlaylist(playlistId);
+        var snapshotId = await GetPlaylistSnapshotId(playlistId);
 
-        return cachedSnapshotId != playlist.SnapshotId;
+        if (!string.IsNullOrEmpty(snapshotId))
+            return cachedSnapshotId != snapshotId;
+
+        _logger.LogError("[Nefarious:Spotify] snapshot id returned invalid for '{PlaylistId}'", playlistId);
+        return false;
     }
 
-    /*
-    TODO: eventually clear the cache to prevent any nasty overflows or stale in memory caching.
-     I find this process extremely bogus and really need to figure out a better temporary caching solution persistence.
-     */
-    /// <summary>
-    /// Sends an API call to spotify to retrieve the playlist for memory caching.
-    /// </summary>
-    /// <param name="playlistId">The Identifier of the playlist.</param>
-    /// <returns></returns>
-    private async Task<FullPlaylist> GetPlaylistFromApi(string playlistId)
-    {
-        if (_memoryCache.TryGetValue(playlistId, out var cachedPlaylist))
-            return cachedPlaylist;
-
-        var playlist = await _spotifyClient.Playlists.Get(playlistId);
-
-        if (string.IsNullOrEmpty(playlist.SnapshotId))
-            _memoryCache[playlistId] = playlist;
-
-        return playlist;
-    }
+    private async Task<string> GetPlaylistSnapshotId(string playlistId)
+        => (await _spotifyClient.Playlists.Get(playlistId, new PlaylistGetRequest { Fields = { "snapshot_id" } }))
+            .SnapshotId ?? string.Empty;
 }
