@@ -5,6 +5,7 @@ using Nefarious.Core.Services;
 using Nefarious.Spotify.Extensions;
 using Nefarious.Spotify.Publishers;
 using Nefarious.Spotify.Repository;
+using Nefarious.Spotify.Services;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -37,6 +38,7 @@ try
     builder.Services.AddSpotifyClient();
     builder.Services.AddDiscordWebsocketClient(configuration);
 
+    builder.Services.AddSingleton<IPlaylistSubscriptionService, PlaylistSubscriptionService>();
     builder.Services.AddSingleton<ICachedPlaylistRepository, CachedPlaylistRepository>();
     
     // Hosted services or background services go here.
