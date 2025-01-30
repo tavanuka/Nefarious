@@ -11,7 +11,6 @@ public static class FullPlaylistExtensions
     /// </summary>
     /// <param name="playlist">The playlist to retrieve the track from.</param>
     /// <returns>A <see cref="PlaylistTrack{T}"/> where <c>T</c> is <see cref="IPlayableItem"/> representing the last added track, or an empty track if none are found.</returns>
-    [Pure]
     public static PlaylistTrack<IPlayableItem> GetLastTrack(this FullPlaylist playlist) =>
         playlist.Tracks?.Items?
             .OrderByDescending(t => t.AddedAt)
@@ -28,7 +27,6 @@ public static class FullPlaylistExtensions
     /// <remarks>
     /// The method supports both tracks <see cref="FullTrack"/> and episodes <see cref="FullEpisode"/> based on the <see cref="ItemType"/> property enum of <see cref="IPlayableItem"/>.
     /// </remarks>
-    [Pure]
     public static PlaylistTrack<T> GetTrack<T>(this FullPlaylist playlist, string trackId) where T : class, IPlayableItem =>
         playlist.Tracks?.Items?
                 .FirstOrDefault(t => IsMatchingTrackOrEpisode(t.Track, trackId))
