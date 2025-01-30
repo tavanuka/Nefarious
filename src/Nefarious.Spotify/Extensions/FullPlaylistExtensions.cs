@@ -40,6 +40,32 @@ public static class FullPlaylistExtensions
             }
             : new PlaylistTrack<T>();
 
+    public static IEnumerable<PlaylistTrack<IPlayableItem>> GetAddedPlaylistTracks(this FullPlaylist playlist, FullPlaylist referencePlaylist)
+    {
+        var trackIds = playlist.GetTrackIds();
+        var referenceTrackIds = referencePlaylist.GetTrackIds();
+        return playlist.Tracks?.Items?
+            .Where(t =>
+                trackIds.Contains(t.Track.GetTrackId()) &&
+                referenceTrackIds.Contains(t.Track.GetTrackId()) is false) ?? [];
+    }
+
+    public static IEnumerable<PlaylistTrack<IPlayableItem>> GetRemovedPlaylistTracks(this FullPlaylist playlist, FullPlaylist referencePlaylist)
+    {
+        var trackIds = playlist.GetTrackIds();
+        var referenceTrackIds = referencePlaylist.GetTrackIds();
+        return referencePlaylist.Tracks?.Items?
+            .Where(t =>
+                trackIds.Contains(t.Track.GetTrackId()) is false &&
+                referenceTrackIds.Contains(t.Track.GetTrackId())) ?? [];
+    }
+
+    private static HashSet<string> GetTrackIds(this FullPlaylist playlist)
+        => playlist.Tracks?.Items?
+            .Select(t => t.Track.GetTrackId())
+            .Where(id => !string.IsNullOrEmpty(id))
+            .ToHashSet() ?? [];
+
     private static bool IsMatchingTrackOrEpisode(IPlayableItem track, string trackId) =>
         track.Type == ItemType.Track && track is FullTrack fullTrack && fullTrack.Id == trackId ||
         track.Type == ItemType.Episode && track is FullEpisode fullEpisode && fullEpisode.Id == trackId;
