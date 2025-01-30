@@ -2,6 +2,7 @@
 using System.Diagnostics.Contracts;
 
 namespace Nefarious.Spotify.Extensions;
+
 // I actually did tests on this. too good to be true?
 public static class FullPlaylistExtensions
 {
