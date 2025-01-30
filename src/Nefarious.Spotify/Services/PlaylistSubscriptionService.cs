@@ -10,6 +10,7 @@ public class PlaylistSubscriptionService : IPlaylistSubscriptionService
     private readonly ConcurrentDictionary<string, SemaphoreSlim> _locks = new();
 
     // TODO: add ability to cache or store them somewhere to complement in memory storage and enable persistence.
+    // TODO: In distant future when this scales, I dont want ulong to be hardcoded and add an module agnostic subscriber type.
     public PlaylistSubscriptionService(ILogger<PlaylistSubscriptionService> logger)
     {
         _logger = logger;
