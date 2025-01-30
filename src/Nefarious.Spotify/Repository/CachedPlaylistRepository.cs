@@ -33,25 +33,32 @@ public class CachedPlaylistRepository : ICachedPlaylistRepository
     }
 
     public async Task<FullPlaylist> GetPlaylist(string playlistId)
+        => await _spotifyClient.Playlists.Get(playlistId);
+
+    public async Task<FullPlaylist> GetCachedPlaylist(string playlistId)
     {
         var playlistKey = $"playlist:{playlistId}";
+        var cachedPlaylist = await _cache.GetStringAsync(playlistKey);
+
+        if (string.IsNullOrEmpty(cachedPlaylist))
+            return new FullPlaylist();
+
+        return JsonSerializer.Deserialize<FullPlaylist>(cachedPlaylist, _jsonOptions) ?? new FullPlaylist();
+    }
+
+    public async Task SavePlaylistToCache(FullPlaylist playlist)
+    {
+        var playlistKey = $"playlist:{playlist.Id}";
         var snapshotKey = $"{playlistKey}:snapshot";
 
-        var playlist = await _spotifyClient.Playlists.Get(playlistId);
-
         if (string.IsNullOrEmpty(playlist.SnapshotId))
-            return playlist;
+        {
+            _logger.LogError("[Nefarious:Spotify] given playlist has no given snapshot ID. Skipping cache saving");
+            return;
+        }
 
-        var cachedPlaylist = await _cache.GetStringAsync(playlistKey);
-        var cachedSnapshotId = await _cache.GetStringAsync(snapshotKey);
-
-        if (!string.IsNullOrEmpty(cachedPlaylist) && cachedSnapshotId == playlist.SnapshotId)
-            return JsonSerializer.Deserialize<FullPlaylist>(cachedPlaylist, _jsonOptions) ?? new FullPlaylist();
-
-        await _cache.SetStringAsync(snapshotKey, playlist.SnapshotId);
         await _cache.SetStringAsync(playlistKey, JsonSerializer.Serialize(playlist, options: _jsonOptions));
-
-        return playlist;
+        await _cache.SetStringAsync(snapshotKey, playlist.SnapshotId);
     }
 
     public async Task<bool> IsPlaylistUpdated(string playlistId)
