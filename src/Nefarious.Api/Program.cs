@@ -59,7 +59,13 @@ try
     
     app.UseAuthorization();
     app.MapControllers();
-    
+
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var subService = scope.ServiceProvider.GetRequiredService<IPlaylistSubscriptionService>();
+        await subService.AddSubscription("03I7be2NrmPbDboNKz739w", 1297242079742922796UL);
+    }
     app.Run();
 }
 catch (Exception e)
