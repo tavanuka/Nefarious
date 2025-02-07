@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using SpotifyAPI.Web;
+using Nefarious.Spotify.Repository;
 
 namespace Nefarious.Spotify.Services;
 
@@ -9,29 +9,17 @@ public interface IPlaylistService
     Task<bool> IsPlaylistUpdated(string playlistId);
 }
 
+[Obsolete("Will be replaced by the ICachedPlaylistRepository implementation. I think.")]
 public class PlaylistService : IPlaylistService
 {
-    private readonly ISpotifyClient _spotifyClient;
     private readonly IDistributedCache _cache;
     private readonly ILogger<PlaylistService> _logger;
 
-    public PlaylistService(ISpotifyClient spotifyClient, IDistributedCache cache, ILogger<PlaylistService> logger)
+    public PlaylistService(IDistributedCache cache, ILogger<PlaylistService> logger, ICachedPlaylistRepository playlistRepository)
     {
-        _spotifyClient = spotifyClient;
         _cache = cache;
         _logger = logger;
     }
-
-    public async Task<bool> IsPlaylistUpdated(string playlistId)
-    {
-        var playlist = await _spotifyClient.Playlists.Get(playlistId);
-        var cacheTrackCount = await _cache.GetStringAsync($"playlist:{playlistId}:track_count");
-        
-        if (int.TryParse(cacheTrackCount, out var cachedTrackCount) && cachedTrackCount == playlist.Tracks?.Total)
-            return false;
-        
-        await _cache.SetStringAsync($"playlist:{playlistId}:track_count", playlist.Tracks?.Total.ToString() ?? "0");
-        return true;
-    }
-    
+    [Obsolete("Will be replaced by the ICachedPlaylistRepository implementation. I think.")]
+    public Task<bool> IsPlaylistUpdated(string playlistId) => throw new NotImplementedException();
 }
