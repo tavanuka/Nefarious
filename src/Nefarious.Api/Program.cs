@@ -1,11 +1,12 @@
 ﻿// Two-stage initialization: https://github.com/serilog/serilog-aspnetcore?tab=readme-ov-file#two-stage-initialization
 using Nefarious.Common.Extensions;
-using Nefarious.Core.Extensions;
+
 using Nefarious.Core.Services;
 using Nefarious.Spotify.Extensions;
 using Nefarious.Spotify.Publishers;
 using Nefarious.Spotify.Repository;
 using Nefarious.Spotify.Services;
+using NetCord.Hosting.Gateway;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -35,14 +36,15 @@ try
     builder.AddRedisDistributedCache(connectionName: "nefarious-cache");
     
     // Communication clients to various third party services go here.
-    builder.Services.AddSpotifyClient();
-    builder.Services.AddDiscordWebsocketClient(configuration);
+    builder.Services
+        .AddSpotifyClient()
+        .AddDiscordGateway();
 
     builder.Services.AddSingleton<IPlaylistSubscriptionService, PlaylistSubscriptionService>();
     builder.Services.AddSingleton<ICachedPlaylistRepository, CachedPlaylistRepository>();
-    
+
     // Hosted services or background services go here.
-    builder.Services.AddHostedService<NefariousBotService>();
+    builder.Services.AddHostedService<PlaylistEventDispatcher>();
     builder.Services.AddHostedService<PlaylistMonitorPublisher>();
     
     var app = builder.Build();

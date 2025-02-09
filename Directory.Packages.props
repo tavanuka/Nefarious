@@ -11,10 +11,6 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
-        <PackageVersion Include="Discord.Net" Version="3.17.0"/>
-        <PackageVersion Include="Discord.Net.Commands" Version="3.17.0"/>
-        <PackageVersion Include="Discord.Net.Core" Version="3.17.0"/>
-        <PackageVersion Include="Discord.Net.WebSocket" Version="3.17.0"/>
         <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="[8.0.11]"/>
         <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.1"/>
         <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.1"/>
@@ -25,6 +21,8 @@
         <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.0"/>
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0"/>
+        <PackageVersion Include="NetCord" Version="1.0.0-alpha.345"/>
+        <PackageVersion Include="NetCord.Hosting" Version="1.0.0-alpha.345"/>
         <PackageVersion Include="NSubstitute" Version="5.3.0"/>
         <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17"/>
         <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.10.0"/>
