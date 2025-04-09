@@ -12,6 +12,8 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+        <PackageReference Include="NetCord" />
+        <PackageReference Include="NetCord.Hosting" />
         <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.AspNetCore" />
         <PackageReference Include="Serilog.Extensions.Hosting"/>
