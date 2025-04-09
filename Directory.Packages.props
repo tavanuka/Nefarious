@@ -20,7 +20,7 @@
         <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.0"/>
         <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.0"/>
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0"/>
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0"/>
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0"/>
         <PackageVersion Include="NetCord" Version="1.0.0-alpha.345"/>
         <PackageVersion Include="NetCord.Hosting" Version="1.0.0-alpha.345"/>
         <PackageVersion Include="NSubstitute" Version="5.3.0"/>
