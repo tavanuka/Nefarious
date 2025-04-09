@@ -10,6 +10,7 @@
         <PackageReference Include="Aspire.StackExchange.Redis"/>
         <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
         <PackageReference Include="NetCord" />
