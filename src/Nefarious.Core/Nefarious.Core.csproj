@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Discord.Net"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="NetCord" />
         <PackageReference Include="StackExchange.Redis"/>
     </ItemGroup>
 
@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Extensions\" />
         <Folder Include="Handlers\"/>
     </ItemGroup>
 

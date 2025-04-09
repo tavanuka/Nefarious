@@ -10,9 +10,9 @@
     <ItemGroup>
         <PackageReference Include="Aspire.StackExchange.Redis"/>
         <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching"/>
-        <PackageReference Include="Discord.Net.WebSocket"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
         <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="NetCord.Hosting" />
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol"/>
         <PackageReference Include="OpenTelemetry.Extensions.Hosting"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.Http"/>

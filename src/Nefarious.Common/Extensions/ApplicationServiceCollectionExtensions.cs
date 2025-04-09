@@ -19,9 +19,6 @@ public static class ApplicationServiceCollectionExtensions
     /// <returns>Updated service collection context.</returns>
     public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddOptions<DiscordOptions>()
-            .Bind(configuration.GetRequiredSection(DiscordOptions.SectionName))
-            .ValidateOnStart();
         services.AddOptions<SpotifyOptions>()
             .Bind(configuration.GetRequiredSection(SpotifyOptions.SectionName))
             .ValidateOnStart();
