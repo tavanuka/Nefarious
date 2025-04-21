@@ -21,8 +21,8 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.4" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="NetCord" Version="1.0.0-alpha.345" />
-    <PackageVersion Include="NetCord.Hosting" Version="1.0.0-alpha.345" />
+    <PackageVersion Include="NetCord" Version="1.0.0-alpha.363" />
+    <PackageVersion Include="NetCord.Hosting" Version="1.0.0-alpha.363" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17">
       <PrivateAssets>all</PrivateAssets>
