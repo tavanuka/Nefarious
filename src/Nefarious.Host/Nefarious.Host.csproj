@@ -8,24 +8,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.StackExchange.Redis"/>
-        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching"/>
+        <PackageReference Include="Aspire.StackExchange.Redis" />
+        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
-        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" />
         <PackageReference Include="NetCord.Hosting" />
-        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol"/>
-        <PackageReference Include="OpenTelemetry.Extensions.Hosting"/>
-        <PackageReference Include="OpenTelemetry.Instrumentation.Http"/>
-        <PackageReference Include="OpenTelemetry.Instrumentation.Runtime"/>
-        <PackageReference Include="Serilog"/>
-        <PackageReference Include="Serilog.Extensions.Hosting"/>
-        <PackageReference Include="Serilog.Formatting.Compact"/>
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.Http" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
+        <PackageReference Include="Serilog" />
+        <PackageReference Include="Serilog.Extensions.Hosting" />
+        <PackageReference Include="Serilog.Formatting.Compact" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Nefarious.Common\Nefarious.Common.csproj"/>
-        <ProjectReference Include="..\Nefarious.Core\Nefarious.Core.csproj"/>
-        <ProjectReference Include="..\Nefarious.Spotify\Nefarious.Spotify.csproj"/>
+        <ProjectReference Include="..\Nefarious.Common\Nefarious.Common.csproj" />
+        <ProjectReference Include="..\Nefarious.Core\Nefarious.Core.csproj" />
+        <ProjectReference Include="..\Nefarious.Spotify\Nefarious.Spotify.csproj" />
     </ItemGroup>
 
 </Project>
