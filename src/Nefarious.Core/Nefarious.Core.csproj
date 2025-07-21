@@ -8,18 +8,18 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
         <PackageReference Include="NetCord" />
-        <PackageReference Include="StackExchange.Redis"/>
+        <PackageReference Include="StackExchange.Redis" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Nefarious.Common\Nefarious.Common.csproj"/>
+        <ProjectReference Include="..\Nefarious.Common\Nefarious.Common.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Extensions\" />
-        <Folder Include="Handlers\"/>
+        <Folder Include="Handlers\" />
     </ItemGroup>
 
 </Project>
